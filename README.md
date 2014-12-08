@@ -63,8 +63,8 @@ E assim é iniciado o servidor WebSockets!
 
 Acesse a URL **/presenter** e use:
 
-*Usuário: admin
-*Senha: 
+* Usuário: admin
+* Senha: phprules
 
 
 ## Identificação automática de IPs
