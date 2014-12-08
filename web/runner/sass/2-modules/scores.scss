@@ -1,0 +1,40 @@
+/******************** Elements ********************/
+
+/******************** Classes ********************/
+
+/******************** Ids ********************/
+
+#scores {
+	color: $branco;
+	display: none;
+	left: 50%;
+	position: absolute;
+	top: 10%;
+	width: 320px;
+
+	.content {
+		background: $preto;
+		margin-left: -160px;
+		padding: 20px 20px;
+		text-align: center;
+		width: 280px;
+
+		h1 {
+			border-bottom: 1px dashed $branco;
+			border-top: 1px dashed $branco;
+			font-size: 20px;
+			margin-bottom: 20px;
+			padding: 10px;
+		}
+
+		table {
+			tr {
+				td {
+					padding: 5px 0;
+				}
+			}
+		}
+	}
+}
+
+/******************** Media Queries ********************/

@@ -1,0 +1,13 @@
+{
+	"autoload": {
+        "psr-0": {
+            "Database": "src",
+            "Network": "src"
+        }
+    },
+    "require": {
+        "silex/silex": "~1.2",
+        "twig/twig": ">=1.8,<2.0-dev",
+        "agentejo/mongo-lite": "dev-master"
+    }
+}

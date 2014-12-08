@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!--base href="runner/" -->
+
+        <meta name="resource-types" content="document" />
+        <meta name="classification" content="Internet" /> 
+        <meta name="author" content="R3C" />
+        <meta name="language" content="pt-br" /> 
+        <meta name="copyright" content="©R3C" /> 
+        <title>Runner</title>
+		
+		<link id="page_favicon" href="images/favicon.ico" rel="icon" type="image/x-icon" />
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="viewport" content="user-scalable=0, initial-scale=1, minimum-scale=1, maximum-scale=1, width=device-width, minimal-ui=1">
+        
+        <link rel="stylesheet" href="css/style.css" />
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    
+    </head>
+    
+    <body>
+		
+		<div id="container">
+
+            <div id="scores">
+                <div class="content">
+                    <h1>SCORES</h1>
+
+                    <table width="100%"></table>
+                </div>
+            </div>
+			
+            <div id="phaser-canvas"></div>
+
+		</div><!-- end div#container -->
+     	
+     	<!-- scripts at the end of file -->
+     	<script src="js/plugins/jquery.min.js"></script>
+        <script src="js/plugins/phaser.min.js"></script>
+		<script src="js/code.min.js"></script>
+
+        <script type="text/javascript">
+            var url = '{{ ip }}:1000';
+        </script>
+    </body>
+</html>

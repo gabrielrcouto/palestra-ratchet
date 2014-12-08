@@ -1,0 +1,405 @@
+/**
+ * A simple theme for reveal.js presentations, similar
+ * to the default theme. The accent color is darkblue.
+ *
+ * This theme is Copyright (C) 2012 Owen Versteeg, https://github.com/StereotypicalApps. It is MIT licensed.
+ * reveal.js is Copyright (C) 2011-2012 Hakim El Hattab, http://hakim.se
+ */
+/*********************************************
+ * GLOBAL STYLES
+ *********************************************/
+/* line 7, ../sass/template/theme.scss */
+body {
+  background: white;
+  background-color: white;
+}
+
+/* line 12, ../sass/template/theme.scss */
+.reveal {
+  font-family: "Lato", sans-serif;
+  font-size: 36px;
+  font-weight: normal;
+  letter-spacing: -0.02em;
+  color: black;
+}
+
+/* line 20, ../sass/template/theme.scss */
+::selection {
+  color: white;
+  background: rgba(0, 0, 0, 0.99);
+  text-shadow: none;
+}
+
+/*********************************************
+ * HEADERS
+ *********************************************/
+/* line 35, ../sass/template/theme.scss */
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  margin: 0 0 20px 0;
+  color: black;
+  font-family: "News Cycle", Impact, sans-serif;
+  line-height: 0.9em;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  text-shadow: none;
+}
+
+/* line 47, ../sass/template/theme.scss */
+.reveal h1 {
+  text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+}
+
+/*********************************************
+ * LINKS
+ *********************************************/
+/* line 56, ../sass/template/theme.scss */
+.reveal a:not(.image) {
+  color: black;
+  text-decoration: none;
+  -webkit-transition: color .15s ease;
+  -moz-transition: color .15s ease;
+  -ms-transition: color .15s ease;
+  -o-transition: color .15s ease;
+  transition: color .15s ease;
+}
+
+/* line 66, ../sass/template/theme.scss */
+.reveal a:not(.image):hover {
+  color: #333333;
+  text-shadow: none;
+  border: none;
+}
+
+/* line 73, ../sass/template/theme.scss */
+.reveal .roll span:after {
+  color: #fff;
+  background: black;
+}
+
+/*********************************************
+ * IMAGES
+ *********************************************/
+/* line 83, ../sass/template/theme.scss */
+.reveal section img {
+  margin: 15px 0px;
+  background: rgba(255, 255, 255, 0.12);
+  -webkit-transition: all .2s linear;
+  -moz-transition: all .2s linear;
+  -ms-transition: all .2s linear;
+  -o-transition: all .2s linear;
+  transition: all .2s linear;
+}
+
+/* line 94, ../sass/template/theme.scss */
+.reveal a:hover img {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: black;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
+}
+
+/*********************************************
+ * NAVIGATION CONTROLS
+ *********************************************/
+/* line 107, ../sass/template/theme.scss */
+.reveal .controls div.navigate-left,
+.reveal .controls div.navigate-left.enabled {
+  border-right-color: black;
+}
+
+/* line 112, ../sass/template/theme.scss */
+.reveal .controls div.navigate-right,
+.reveal .controls div.navigate-right.enabled {
+  border-left-color: black;
+}
+
+/* line 117, ../sass/template/theme.scss */
+.reveal .controls div.navigate-up,
+.reveal .controls div.navigate-up.enabled {
+  border-bottom-color: black;
+}
+
+/* line 122, ../sass/template/theme.scss */
+.reveal .controls div.navigate-down,
+.reveal .controls div.navigate-down.enabled {
+  border-top-color: black;
+}
+
+/* line 126, ../sass/template/theme.scss */
+.reveal .controls div.navigate-left.enabled:hover {
+  border-right-color: #333333;
+}
+
+/* line 130, ../sass/template/theme.scss */
+.reveal .controls div.navigate-right.enabled:hover {
+  border-left-color: #333333;
+}
+
+/* line 134, ../sass/template/theme.scss */
+.reveal .controls div.navigate-up.enabled:hover {
+  border-bottom-color: #333333;
+}
+
+/* line 138, ../sass/template/theme.scss */
+.reveal .controls div.navigate-down.enabled:hover {
+  border-top-color: #333333;
+}
+
+/*********************************************
+ * PROGRESS BAR
+ *********************************************/
+/* line 147, ../sass/template/theme.scss */
+.reveal .progress {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* line 150, ../sass/template/theme.scss */
+.reveal .progress span {
+  background: black;
+  -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  -moz-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  -ms-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  -o-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+}
+
+/*********************************************
+ * SLIDE NUMBER
+ *********************************************/
+/* line 163, ../sass/template/theme.scss */
+.reveal .slide-number {
+  color: black;
+}
+
+/* line 38, ../sass/simple.scss */
+html, body, iframe {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 44, ../sass/simple.scss */
+body {
+  overflow: hidden;
+}
+
+/*********************************************
+ * QUESTIONS
+ *********************************************/
+/* line 52, ../sass/simple.scss */
+.questions {
+  background: rgba(255, 255, 255, 0.9);
+  bottom: 0;
+  left: 0;
+  font-family: "Lato", sans-serif;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  z-index: 99;
+}
+/* line 64, ../sass/simple.scss */
+.questions .button span {
+  font-size: 30px;
+}
+/* line 69, ../sass/simple.scss */
+.questions input[type="text"] {
+  font-size: 20px;
+  max-width: 400px;
+  padding: 0.8em;
+  width: 80%;
+}
+/* line 76, ../sass/simple.scss */
+.questions .messages {
+  font-size: 20px;
+  height: 100%;
+  overflow: scroll;
+  width: 100%;
+}
+/* line 82, ../sass/simple.scss */
+.questions .messages .message {
+  border-bottom: 1px solid #c0c0c0;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+/*********************************************
+ * NICKNAME
+ *********************************************/
+/* line 94, ../sass/simple.scss */
+.nickname {
+  background: rgba(255, 255, 255, 0.9);
+  bottom: 0;
+  left: 0;
+  font-family: "Lato", sans-serif;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  z-index: 99;
+}
+/* line 106, ../sass/simple.scss */
+.nickname .button span {
+  font-size: 50px;
+}
+/* line 111, ../sass/simple.scss */
+.nickname input[type="text"] {
+  font-size: 20px;
+  max-width: 400px;
+  padding: 0.8em;
+  width: 80%;
+}
+/* line 118, ../sass/simple.scss */
+.nickname .message {
+  font-size: 30px;
+}
+
+/*********************************************
+ * BUTTON!
+ *********************************************/
+/* line 127, ../sass/simple.scss */
+.button {
+  position: relative;
+  display: inline-block;
+  margin: 20px;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+/* line 137, ../sass/simple.scss */
+.button span {
+  color: #ffffff !important;
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 90px;
+  text-align: center;
+  text-decoration: none;
+  background-color: #FFA12B;
+  display: block;
+  position: relative;
+  padding: 40px 80px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  text-shadow: 0px 1px 0px #000;
+  filter: dropshadow(color=black, offx=0px, offy=1px);
+  -webkit-box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+  -moz-box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+  box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+/* line 162, ../sass/simple.scss */
+.button span:active {
+  top: 10px;
+  background-color: #F78900;
+  -webkit-box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
+  -moz-box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3pxpx 0 #915100;
+  box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
+}
+
+/* line 172, ../sass/simple.scss */
+.button:after {
+  content: "";
+  height: 100%;
+  width: 100%;
+  padding: 4px;
+  position: absolute;
+  bottom: -15px;
+  left: -4px;
+  z-index: -1;
+  background-color: #2B1800;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+/*********************************************
+ * BUTTON LEVEL
+ *********************************************/
+/* line 191, ../sass/simple.scss */
+.button-level {
+  background-color: #FFA12B;
+  position: relative;
+  display: inline-block;
+  margin: 20px !important;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+/* line 202, ../sass/simple.scss */
+.button-level .level {
+  bottom: 0;
+  height: 0%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+}
+/* line 212, ../sass/simple.scss */
+.button-level .level.blue {
+  background: #3498db;
+}
+/* line 216, ../sass/simple.scss */
+.button-level .level.green {
+  background: #27ae60;
+}
+/* line 220, ../sass/simple.scss */
+.button-level .level.red {
+  background: #e74c3c;
+}
+/* line 224, ../sass/simple.scss */
+.button-level .level.yellow {
+  background: #f1c40f;
+}
+/* line 228, ../sass/simple.scss */
+.button-level span {
+  color: #ffffff !important;
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 90px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  position: relative;
+  padding: 40px 80px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  text-shadow: 0px 1px 0px #000;
+  filter: dropshadow(color=black, offx=0px, offy=1px);
+  -webkit-box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+  -moz-box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+  box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  z-index: 99;
+}
+/* line 255, ../sass/simple.scss */
+.button-level span:active {
+  top: 10px;
+  background-color: #F78900;
+  -webkit-box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
+  -moz-box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3pxpx 0 #915100;
+  box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
+}
+
+/* line 265, ../sass/simple.scss */
+.button-level:after {
+  content: "";
+  height: 100%;
+  width: 100%;
+  padding: 4px;
+  position: absolute;
+  bottom: -15px;
+  left: -4px;
+  z-index: -1;
+  background-color: #2B1800;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}

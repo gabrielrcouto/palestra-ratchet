@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <base href="/">
+
+        <title>Ratchet</title>
+
+        <meta name="description" content="Usando WebSockets com PHP para jogos multiplayer">
+        <meta name="author" content="@gabrielrcouto">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="fonts/google/stylesheet.css">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/simple.css" id="theme">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+        <script>
+            if( window.location.search.match( /print-pdf/gi ) ) {
+                var link = document.createElement( 'link' );
+                link.rel = 'stylesheet';
+                link.type = 'text/css';
+                link.href = 'css/print/pdf.css';
+                document.getElementsByTagName( 'head' )[0].appendChild( link );
+            }
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+        {% if nickname == false %}
+        <div class="nickname">
+            <h1>Digite seu apelido</h1>
+            <p><input type="text" placeholder="Algo como: Bob" name="nickname" /></p>
+
+            <div class="button">
+                <span>OK</span>
+            </div>
+
+            <div class="ajax" style="display:none;">
+                <img src="images/ajax-loader.gif" width="24" height="24">
+            </div>
+
+            <div class="message"></div>
+        </div>
+        {% endif %}
+
+        <div class="questions" style="display:none;">
+            {% if presenter %}
+                <h1>Dúvidas</h1>
+                <div class="messages">
+                    <div class="content"></div>
+                </div>
+            {% else %}
+                <p><input type="text" placeholder="Como ganhar dinheiro fácil?" name="duvida" /></p>
+
+                <div class="button">
+                    <span>ENVIAR</span>
+                </div>
+
+                <div class="ajax" style="display:none;">
+                    <img src="images/ajax-loader.gif" width="24" height="24">
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="reveal">
+
+            <div class="slides">
+                <section>
+                    <h1>Essa palestra é INTERATIVA \o/</h1>
+
+                    <h3><i class="fa fa-wifi"></i> palestra <i class="fa fa-link"></i> http://{{ip}}</h3>
+                </section>
+
+                <section>
+                    <h1>Ratchet</h1>
+                    <h3>Usando WebSockets com PHP para jogos multiplayer</h3>
+                </section>
+
+                <section>
+                    <h2>Quem sou eu?</h2>
+                    <p class="fragment">um desenvolvedor web e...</p>
+                    <ul>
+                        <li class="fragment">um viciado em aprender</li>
+                        <li class="fragment">um empresário - R3C <i class="fa fa-heart"></i></li>
+                        <li class="fragment">um engenheiro da computação</li>
+                        <li class="fragment">um dos organizadores do PHPSP-Campinas</li>
+                        <li class="fragment">um fução desde que nasci</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Fui contratado para desenvolver um site de jogos de baralho</h2>
+                    <img src="images/vega.png" width="280" height="132" />
+                </section>
+                
+                <section>   
+                    <h2>Eba, farei usando HTML5!</h2>
+                    <h3>Mas espera, como posso fazer a comunicação em tempo real?</h3>
+                    <ul>
+                        <li class="fragment">Disparando Ajax Requests!</li>
+                        <li class="fragment">Comet = Long Polling</li>
+                        <li class="fragment">WebSockets!</li>
+                    </ul>
+                </section>
+
+                <section class="poll" data-number="2">
+                    <p>Disparar Ajax Requests é ruim porque consome</p>
+
+                    <div class="button-level" data-value="banda">
+                        <span>Banda (<b>0</b>)</span>
+                        <div class="level green"></div>
+                    </div>
+
+                    <div class="button-level" data-value="processamento">
+                        <span>CPU (<b>0</b>)</span>
+                        <div class="level yellow"></div>
+                    </div>
+
+                    <div class="button-level" data-value="conexões">
+                        <span>Conexões (<b>0</b>)</span>
+                        <div class="level blue"></div>
+                    </div>
+                </section>
+
+                <section class="poll" data-number="3">
+                    <p>Long Polling é ruim porque consome</p>
+
+                    <div class="button-level" data-value="banda">
+                        <span>Banda (<b>0</b>)</span>
+                        <div class="level green"></div>
+                    </div>
+
+                    <div class="button-level" data-value="processamento">
+                        <span>CPU (<b>0</b>)</span>
+                        <div class="level yellow"></div>
+                    </div>
+
+                    <div class="button-level" data-value="conexões">
+                        <span>Conexões (<b>0</b>)</span>
+                        <div class="level blue"></div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Que raios é um Socket?</h2>
+                </section>
+
+                <section>
+                    <h2>Sério cara?</h2>
+                    <h3>No final do evento você vai falar de teoria?</h3>
+
+                    <img src="images/dormindo.jpg" width="640" height="480" />
+                </section>
+
+                <section class="poll" data-number="1">
+                    <p>Você sabe o que é um Socket?</p>
+
+                    <div class="button-level" data-value="sim">
+                        <span>Sim (<b>0</b>)</span>
+                        <div class="level green"></div>
+                    </div>
+
+                    <div class="button-level" data-value="não">
+                        <span>Não (<b>0</b>)</span>
+                        <div class="level red"></div>
+                    </div>
+                </section>
+
+                <section>
+                    <img src="images/socket-1.png" width="640" height="558" />
+                </section>
+
+                <section>
+                    <img src="images/socket-2.png" width="640" height="558" />
+                </section>
+
+                <section>
+                    <img src="images/socket-3.png" width="640" height="558" />
+                </section>
+
+                <section>
+                    <img src="images/socket-4.png" width="640" height="558" />
+                </section>
+
+                <section>
+                    <img src="images/socket-5.png" width="640" height="558" />
+                </section>
+
+                <section>
+                    <h2>Um socket tem:</h2>
+                    <ul>
+                        <li class="fragment">protocolo (TCP/IP)</li>
+                        <li class="fragment">endereço de origem : porta de origem (127.0.0.1:2000)</li>
+                        <li class="fragment">endereço de destino : porta de destino (8.8.8.8:23)</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>O tal do WebSocket...</h2>
+                </section>
+
+                <section>
+                    <h2>RFC 6455 - Dezembro de 2011</h2>
+                    <ul>
+                        <li class="fragment"><img src="images/google.jpg" width="271" height="96" /></li>
+                        <li class="fragment">Em 12 de Setembro de 2011 o Google Chrome 15 já implementava</li>
+                        <li class="fragment">The WebSocket Protocol enables two-way communication between a client
+   running untrusted code in a controlled environment to a remote host
+   that has opted-in to communications from that code.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <img src="images/handshake.png" width="640" height="279" />
+                </section>
+
+                <section>
+                    <h2>Vantagem de usar WebSockets:</h2>
+                    <ul>
+                        <li class="fragment">O servidor websocket pode ficar na mesma porta que o HTTP padrão, ele usa campos do cabeçalho HTTP distintos</li>
+                        <li class="fragment">Suporta um servidor rodando múltiplos domínios</li>
+                        <li class="fragment">Suporta proxies HTTP</li>
+                        <li class="fragment">WebSockets possuem sub protocolos => Sec-WebSocket-Protocol: chat</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Socket.io</h2>
+                    <h3>Biblioteca para NodeJS de servidor de WebSockets</h3>
+                </section>
+
+                <section>
+                    <h2><img src="images/ratchet.png" width="64" height="64" /> Ratchet</h2>
+                    <h3>Biblioteca para PHP de servidor de WebSockets</h3>
+                </section>
+
+                <section>
+                    <h2>Para instalar é "muito" difícil!</h2>
+                    <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+{
+    "require": {
+        "cboden/ratchet": "0.3.*"
+    }
+}
+                    </code></pre>
+                </section>
+
+                <section>
+                    <img src="images/ratchet-flow.png" width="922" height="257" />
+                </section>
+
+                <section>
+                    <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+use Ratchet\WebSocket\WsServer;
+use Ratchet\Http\HttpServer;
+use Ratchet\Server\IoServer;
+use Slides\App;
+
+$loader = require __DIR__.'/vendor/autoload.php';
+
+$ws = new WsServer(new Slides\App);
+
+// IOServer = Socket Server;
+// HttpServer = HTTP Server (dã!)
+// WsServer = WebSocket Server
+$server = IoServer::factory(new HttpServer($ws), $port = 1000);
+$server->run();
+                    </code></pre>
+                </section>
+
+                <section>
+                    <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+use Ratchet\MessageComponentInterface;
+use Ratchet\ConnectionInterface;
+
+class App implements MessageComponentInterface
+{
+    public static $connections;
+    public static $lastMessage;
+
+    public function __construct()
+    {
+        self::$connections = new \SplObjectStorage;
+    }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+public function onOpen(ConnectionInterface $connection)
+{
+    self::$connections->attach($connection);
+
+    if (isset(App::$lastMessage)) {
+        Sender::send(App::$lastMessage, $connection);
+    }
+
+    Log::d('Espectador conectado: ' . $connection->resourceId);
+}
+                    </code></pre>
+                </section>
+
+                <section>
+                    <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+
+public function onMessage(ConnectionInterface $connection, $message)
+{
+    App::$lastMessage = $message;
+
+    foreach (self::$connections as $anotherConnection) {
+        if ($anotherConnection !== $connection) {
+            Sender::send($message, $anotherConnection);
+        }
+    }
+
+    Log::d($message);
+}
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2 class="horn counter">0 / 0</h2>
+
+                    <div class="horn button">
+                        <span>Buzinar</span>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>O conceito é simples!</h2>
+                    <h3>Você envia objetos (mensagens) de um lado para o outro</h3>
+                </section>
+
+                <section>
+                    <h2>Padronize seus objetos</h2>
+                    <pre><code class="stretch">
+class HornMessage extends Message 
+{
+    protected $type = 'horn';
+
+    //getters and setters
+}               
+
+class SlideMessage extends Message 
+{
+    protected $type = 'slide';
+    protected $indexh;
+    protected $indexv;
+    protected $indexf;
+
+    //getters and setters
+}       
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Não acredite nos dados que recebe!</h2>
+                    <img src="images/huhuhu.png" width="500" height="254"/>
+                </section>
+
+                <section>
+                    <h3>Um JSON mal formatado retorna NULL</h3>
+                    <pre><code>
+php > $json = 'abc abc toda criança tem que ler e escrever';
+php > var_dump(json_decode($json));
+NULL
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Use um validador de tipo de dados</h3>
+                    <h4>(tipo o Respect\Validation)</h4>
+                    <pre><code>
+$messageValidator = v::attribute('type', v::string()->length(1,32))
+  ->attribute('indexh', v::int());  
+$messageValidator->validate($message);
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>A lógica roda no servidor, nunca no cliente</h3>
+                </section>
+
+                <section>
+                    <img src="images/lag.gif" width="360" height="360"/>
+                </section>
+
+                <section>
+                    <h3>Lag <i class="fa fa-meh-o"></i></h3>
+                </section>
+
+                <section>
+                    <h3><i class="fa fa-tachometer"></i> Latência != Largura de Banda <i class="fa fa-truck"></i><i class="fa fa-truck"></i><i class="fa fa-truck"></i></h3>
+                </section>
+
+                <section>
+                    <a class="button" href="/runner" target="_blank">
+                        <span>JOGAR</span>
+                    </a>
+                </section>
+
+                <section class="heart monitor">
+                    <h3>Latência: <span>0</span>ms</h3>
+                    <canvas class="monitor" style="width: 600px; height: 400px;"></canvas>
+                </section>
+
+                <section>
+                    <h3>A Microsoft está próxima de uma solução</h3>
+                    <p>DeLorean produz quadros especulativos de resultados futuros possíveis, entregando-os ao cliente com antecipação.</p>
+                    <ol>
+                        <li>previsão ações futuras;</li>
+                        <li>amostragem de mudanças de espaço e tempo;</li> 
+                        <li>compensação de previsão errada;</li>
+                        <li>a compressão da largura de banda.</li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h1>Escalabilidade</h1>
+                </section>
+
+                <section>
+                    <h3>Seu servidor WebSocket somente cuida dos WebSockets</h3>
+                </section>
+
+                <section>
+                    <h3>Quem processa o jogo?</h3>
+                    <p>O servidor WebSocket fala com outra coisa usando:</p>
+                    <ul>
+                        <li>ZeroMQ</li>
+                        <li>Rabbitmq</li>
+                        <li>...</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <img src="images/fluxograma-servidores.png" width="500" height="487"/>
+                </section>
+
+                <section>
+                    <img src="images/fluxograma-servidores-2.png" width="500" height="512"/>
+                </section>
+
+                <section class="questions-slide">
+                    <h2>?</h2>
+                </section>
+
+                <section>
+                    <h2>Obrigado</h2>
+                    <p><a href="https://twitter.com/gabrielrcouto" target="_blank">@gabrielrcouto</a></p>
+                    <p><a href="http://r3c.com.br" target="_blank"><img src="images/r3c.png"/></a></p>
+                    <h3><a href="http://phpsp.org.br/" target="_blank">PHPSP</a> - <a href="https://www.facebook.com/groups/grupo.campinas/" target="_blank">Campinas no Facebook</a></h3>
+                </section>
+            </div>
+        </div>
+
+        <script src="js/jquery-1.11.1.min.js"></script>
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+        <script src="js/jquery.tap.min.js"></script>
+        <script src="js/soundjs-0.5.2.min.js"></script>
+
+        <script>
+            url = '{{ ip }}:1000';
+
+            {% if presenter %}
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                mouseWheel: false,
+                margin: 0.01,
+                minScale: 0.5,
+                maxScale: 2.0,
+                width: 960,
+                height: 700,
+
+                transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/multiplex-ratchet/ratchet.js', async: true },
+                    { src: 'js/code.js', async: true },
+                    { src: 'plugin/multiplex-ratchet/master.js', async: true }
+                ],
+
+                multiplex: {
+                    secret: '13652805320794272084',
+                    id: '1ea875674b17ca76',
+                    url: url + '/slides'
+                },
+            });
+            {% else %}
+            Reveal.initialize({
+                controls: false,
+                history: false,
+                keyboard: false,
+                overview: false,
+                touch: false,
+
+                progress: true,
+                center: true,
+
+                transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/multiplex-ratchet/ratchet.js', async: true },
+                    { src: 'js/code.js', async: true },
+                    { src: 'plugin/multiplex-ratchet/client.js', async: true }
+                ],
+
+                multiplex: {
+                    secret: '13652805320794272084',
+                    id: '1ea875674b17ca76',
+                    url: url + '/slides'
+                },
+            });
+            {% endif %}
+        </script>
+    </body>
+</html>

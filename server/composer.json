@@ -1,0 +1,14 @@
+{
+	"autoload": {
+        "psr-0": {
+            "Slides": "src",
+            "Server": "src",
+            "Runner": "src"
+        }
+    },
+    "require": {
+        "cboden/ratchet": "dev-master",
+        "agentejo/mongo-lite": "dev-master",
+        "react/stomp": "0.2.*@dev"
+    }
+}
