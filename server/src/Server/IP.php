@@ -1,5 +1,5 @@
 <?php
-namespace Network;
+namespace Server;
 
 /**
  * Classe responsável por encontrar o IP da máquina servidor
